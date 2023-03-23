@@ -5,8 +5,15 @@ import RecordScreen from './pages/record';
 import {useWatchAccounts} from './contexts/watchAccoutContext';
 import WelcomeScreen from './pages/welcome';
 import CreateWalletScreen from './pages/create_wallet';
+import {useNavigation} from '@react-navigation/native';
+import {Pressable} from 'react-native';
+import styled from 'styled-components/native';
+import Icon from 'react-native-vector-icons/Feather';
+
 const Stack = createNativeStackNavigator();
 const Navigation = () => {
+  const navigation = useNavigation();
+
   const {...watchType} = useWatchAccounts();
   return (
     <Stack.Navigator /*screenOptions={{presentation: 'transparentModal'}}*/>
@@ -30,10 +37,24 @@ const Navigation = () => {
       <Stack.Screen
         name="Create"
         component={CreateWalletScreen}
-        options={{headerShown: false}}
+        options={{
+          // headerShown: false,
+          title: '创建钱包',
+          headerLeft: () => (
+            <Pressable onPress={() => navigation.goBack()}>
+              <ArrowStyledIcon name="arrow-left" />
+            </Pressable>
+          ),
+        }}
       />
     </Stack.Navigator>
   );
 };
+
+export const ArrowStyledIcon = styled(Icon)`
+  align-self: center;
+  font-size: 25px;
+  color: #666666;
+`;
 
 export default Navigation;

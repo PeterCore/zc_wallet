@@ -55,7 +55,8 @@ const WatchAccountsProvider: React.FC<{
 
   return (
     <WatchAccountContext.Provider
-      value={{watchAccouts, storeWatchAccountId, removeWatchAccountId}}>
+      value={{watchAccouts, storeWatchAccountId, removeWatchAccountId}}
+    >
       {props.children}
     </WatchAccountContext.Provider>
   );
