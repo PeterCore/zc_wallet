@@ -46,25 +46,22 @@ export const SubTitleLabel = styled.Text`
   font-size: 14px;
   font-weight: 500;
   margin-bottom: 15px;
-  margin-top: 15px;
-  color: #ddd;
-  max-lines: 2;
+  color: #5b5b5b;
+  max-lines: 2px;
 `;
 export const Button = styled.TouchableOpacity.attrs({
-    activeOpacity: 0.7,
-    })`
-    margin-top: 40px;
-    margin-left: 20px;
-    margin-right: 20px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    font-size: 15px;
-    font-weight: bold;
-    border-width: 2px;
-    border-color: blue;
-    height: 44px;
-    background-color: blue;
+  activeOpacity: 0.7,
+})`
+  margin-top: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  border-width: 2px;
+  border-color: #00ccff;
+  height: 44px;
+  background-color: #00ccff;
 `;
 export const Description = styled.Text`
   font-size: 16px;

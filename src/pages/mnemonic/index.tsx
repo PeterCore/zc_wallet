@@ -9,6 +9,7 @@ import {
   Item,
   MnemonicContainer,
   StyledShadowView,
+  SubTitleLabel,
 } from './styles';
 
 type ParamMnemonic = {
@@ -27,6 +28,9 @@ const MnemonicScreen = () => {
 
   return (
     <Container>
+      <SubTitleLabel>
+        以下是钱包的助记词，抄写下来并导出至安全的地方存放。一旦丢失，无法找回。
+      </SubTitleLabel>
       <MnemonicContainer>
         {mnemonicList.length > 0
           ? mnemonicList.map((item, index) => (
@@ -36,12 +40,8 @@ const MnemonicScreen = () => {
             ))
           : null}
       </MnemonicContainer>
-      <Button
-        onPress={() => {
-          navigation.navigate('Create' as never, {} as never);
-        }}
-      >
-        <Description>创建钱包</Description>
+      <Button onPress={() => {}}>
+        <Description>助记词已抄好</Description>
       </Button>
     </Container>
   );
