@@ -1,5 +1,7 @@
-import {checkPassword} from '@/utils';
+import {checkPassword, generateMnemonic} from '@/utils';
+import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
+import Spinner from 'react-native-loading-spinner-overlay/lib';
 import {
   Container,
   CreateWalletButton,
@@ -16,6 +18,8 @@ const CreateWalletScreen = () => {
   const [confirmPasswordValue, setConfirmPasswordValue] = useState('');
   const [validpassword, setVaildPassword] = useState(false);
   const [confirmVaild, setConfirmVaild] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigation = useNavigation();
 
   const checkPasswordVaild = (password: string) => {
     const vaild: boolean = checkPassword(password);
@@ -31,8 +35,22 @@ const CreateWalletScreen = () => {
     setConfirmVaild(confirm && validpassword);
   };
 
+  const navigationMnemonicScreen = async () => {
+    setIsLoading(true);
+    const mnemonic = generateMnemonic();
+    if (mnemonic) {
+      setIsLoading(false);
+      navigation.navigate('Mnemonic' as never, {mnemonic: mnemonic} as never);
+    }
+  };
+
   return (
     <Container>
+      <Spinner
+        visible={isLoading}
+        textContent={'Loading...'}
+        textStyle={{color: '#FFF'}}
+      />
       <SubTitleLabel>
         密码仅能解锁当前软件，且只保存在本手机设备上
       </SubTitleLabel>
@@ -59,7 +77,10 @@ const CreateWalletScreen = () => {
           selectionColor="#333333"
         />
       </InputWrapper>
-      <CreateWalletButton active={confirmVaild} onPress={() => {}}>
+      <CreateWalletButton
+        active={confirmVaild}
+        onPress={navigationMnemonicScreen}
+      >
         <Description>创建钱包</Description>
       </CreateWalletButton>
     </Container>

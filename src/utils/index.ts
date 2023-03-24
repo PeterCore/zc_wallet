@@ -9,6 +9,7 @@ export const generateMnemonic = (length: number = 16) => {
     return mnemonic;
   } catch (error) {
     console.log(error);
+    return null;
   }
 };
 
@@ -17,9 +18,5 @@ export const checkPassword = (password: string) => {
   const result: boolean = regex.test(password);
   // const regex_upper_letter: RegExp = /^[A-Z]/;
   // const regex_lower_letter: RegExp = /^[a-z]/;
-
-
   return result;
 };
-
-

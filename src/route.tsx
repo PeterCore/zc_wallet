@@ -9,6 +9,7 @@ import {useNavigation} from '@react-navigation/native';
 import {Pressable} from 'react-native';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/Feather';
+import MnemonicScreen from './pages/mnemonic';
 
 const Stack = createNativeStackNavigator();
 const Navigation = () => {
@@ -40,6 +41,19 @@ const Navigation = () => {
         options={{
           // headerShown: false,
           title: '创建钱包',
+          headerLeft: () => (
+            <Pressable onPress={() => navigation.goBack()}>
+              <ArrowStyledIcon name="arrow-left" />
+            </Pressable>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="Mnemonic"
+        component={MnemonicScreen}
+        options={{
+          // headerShown: false,
+          title: '助记词',
           headerLeft: () => (
             <Pressable onPress={() => navigation.goBack()}>
               <ArrowStyledIcon name="arrow-left" />
