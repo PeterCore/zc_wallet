@@ -1,6 +1,10 @@
 import styled from 'styled-components/native';
 import DropShadow from 'react-native-drop-shadow';
 
+interface Props {
+  active: boolean;
+}
+
 export const StyledShadowView = styled(DropShadow)(() => ({
   shadowColor: '#000',
   shadowOffset: {
@@ -17,7 +21,7 @@ export const Container = styled.View`
   padding: 20px;
   background-color: #fff;
 `;
-export const MnemonicContainer = styled.View`
+export const MnemonicSelectedContainer = styled.View`
   flex-direction: column;
   padding: 20px;
   background-color: #ededed;
@@ -25,6 +29,15 @@ export const MnemonicContainer = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
   height: 160px;
+`;
+export const MnemonicContainer = styled.View`
+  flex-direction: column;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 6px;
+  flex-direction: row;
+  flex-wrap: wrap;
 `;
 
 export const Item = styled.Text`
@@ -53,16 +66,12 @@ export const SubTitleLabel = styled.Text`
 export const Button = styled.TouchableOpacity.attrs({
   activeOpacity: 0.7,
 })`
-  margin-top: 40px;
+  margin-top: 20px;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  font-size: 15px;
-  font-weight: bold;
-  border-width: 2px;
-  border-color: #00ccff;
   height: 44px;
-  background-color: #00ccff;
+  background-color: ${(props: Props) => (props.active ? '#333333' : '#ededed')};
 `;
 export const Description = styled.Text`
   font-size: 16px;
@@ -70,3 +79,14 @@ export const Description = styled.Text`
   align-items: center;
   font-weight: bold;
 `;
+
+// export const BackupButton = styled.Button`
+//   align-items: center;
+//   justify-content: space-between;
+//   border-radius: 10px;
+//   font-size: 20px;
+//   font-weight: bold;
+//   flex-direction: row;
+//   width: 200px;
+//   background-color: red;
+// `;

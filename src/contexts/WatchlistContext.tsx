@@ -50,7 +50,8 @@ const WatchlistProvider: React.FC<React.ReactNode> = (
 
   return (
     <WatchlistContext.Provider
-      value={{watchlistCoinIds, storeWatchlistCoinId, removeWatchlistCoinId}}>
+      value={{watchlistCoinIds, storeWatchlistCoinId, removeWatchlistCoinId}}
+    >
       {children}
     </WatchlistContext.Provider>
   );

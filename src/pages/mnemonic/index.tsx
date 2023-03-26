@@ -1,4 +1,4 @@
-import ParamMnemonic from '@/model';
+import {ParamMnemonic} from '@/model';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import React, {useEffect} from 'react';
 
