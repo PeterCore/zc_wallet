@@ -1,7 +1,7 @@
+import ParamMnemonic from '@/model';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
-import {View, Text} from 'react-native';
-import DropShadow from 'react-native-drop-shadow';
+import React, {useEffect} from 'react';
+
 import {
   Button,
   Container,
@@ -12,18 +12,13 @@ import {
   SubTitleLabel,
 } from './styles';
 
-type ParamMnemonic = {
-  Param: {
-    mnemonic: string;
-  };
-};
-
 const MnemonicScreen = () => {
   const navigation = useNavigation();
   const route = useRoute<RouteProp<ParamMnemonic, 'Param'>>();
   const mnemonic = route.params.mnemonic;
+  const password = route.params.password;
   const mnemonicList: Array<string> = mnemonic.split(' ');
-  console.log(mnemonic);
+  console.log(password);
   useEffect(() => {}, []);
 
   return (
@@ -40,7 +35,14 @@ const MnemonicScreen = () => {
             ))
           : null}
       </MnemonicContainer>
-      <Button onPress={() => {}}>
+      <Button
+        onPress={() => {
+          navigation.navigate(
+            'Backup' as never,
+            {mnemonic: mnemonic, password: password} as never,
+          );
+        }}
+      >
         <Description>助记词已抄好</Description>
       </Button>
     </Container>

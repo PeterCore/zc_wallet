@@ -36,11 +36,17 @@ const CreateWalletScreen = () => {
   };
 
   const navigationMnemonicScreen = async () => {
+    if (confirmVaild !== true) {
+      return;
+    }
     setIsLoading(true);
     const mnemonic = generateMnemonic();
     if (mnemonic) {
       setIsLoading(false);
-      navigation.navigate('Mnemonic' as never, {mnemonic: mnemonic} as never);
+      navigation.navigate(
+        'Mnemonic' as never,
+        {mnemonic: mnemonic, password: passwordValue} as never,
+      );
     }
   };
 

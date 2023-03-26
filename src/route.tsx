@@ -10,6 +10,7 @@ import {Pressable} from 'react-native';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/Feather';
 import MnemonicScreen from './pages/mnemonic';
+import BackupMnemonicsScreen from './pages/backup_mnemonics';
 
 const Stack = createNativeStackNavigator();
 const Navigation = () => {
@@ -54,6 +55,19 @@ const Navigation = () => {
         options={{
           // headerShown: false,
           title: '助记词',
+          headerLeft: () => (
+            <Pressable onPress={() => navigation.goBack()}>
+              <ArrowStyledIcon name="arrow-left" />
+            </Pressable>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="Backup"
+        component={BackupMnemonicsScreen}
+        options={{
+          // headerShown: false,
+          title: '备份助记词',
           headerLeft: () => (
             <Pressable onPress={() => navigation.goBack()}>
               <ArrowStyledIcon name="arrow-left" />
