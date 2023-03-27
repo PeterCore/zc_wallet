@@ -15,7 +15,9 @@ const BottomTabNavigator = () => {
 
   StatusBar.setBarStyle('dark-content');
 
-  if (Platform.OS === 'android') StatusBar.setBackgroundColor('#fff');
+  if (Platform.OS === 'android') {
+    StatusBar.setBackgroundColor('#fff');
+  }
 
   if (home) {
     StatusBar.setHidden(true);

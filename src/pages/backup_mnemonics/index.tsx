@@ -4,6 +4,7 @@ import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {Alert} from 'react-native';
 import {
+  AlterLabel,
   Button,
   Container,
   Description,
@@ -16,8 +17,9 @@ import {
 
 const BackupMnemonicsScreen = () => {
   const route = useRoute<RouteProp<ParamMnemonic, 'Param'>>();
-  const [selectedMnemonics, SetSelectedMnemonics] = useState<String[]>([]);
+  const [selectedMnemonics, SetSelectedMnemonics] = useState<string[]>([]);
   const [mnemonics, SetMnemonics] = useState<MnemonicItem[]>([]);
+  const [vaild, SetVaild] = useState(true);
   const password = route.params.password;
   const mnemonic = route.params.mnemonic;
   useEffect(() => {
@@ -42,6 +44,16 @@ const BackupMnemonicsScreen = () => {
     return array;
   };
 
+  const checkMnemonicVaild = (selecteds: string[]) => {
+    var _vaild: boolean = false;
+    const mnemonicList = mnemonic.split(' ');
+    var index = selecteds.length - 1;
+    if (mnemonicList[index] === selecteds[index]) {
+      _vaild = true;
+    }
+    return _vaild;
+  };
+
   return (
     <Container>
       <SubTitleLabel>
@@ -50,9 +62,26 @@ const BackupMnemonicsScreen = () => {
       <MnemonicSelectedContainer>
         {selectedMnemonics.length > 0
           ? selectedMnemonics.map((item, index) => (
-              <StyledShadowView>
-                <Item>{`${item}`}</Item>
-              </StyledShadowView>
+              <Tag
+                key={`${item}+${index}`}
+                title={`${item}`}
+                index={index}
+                enable={true}
+                onClick={value => {
+                  console.log(`selected is ${value}`);
+                  const newSelecteds = selectedMnemonics.filter(
+                    filterItem => filterItem !== value,
+                  );
+                  console.log(`newSelecteds is ${newSelecteds}`);
+                  SetVaild(checkMnemonicVaild(newSelecteds));
+                  SetSelectedMnemonics(newSelecteds);
+                  mnemonics.forEach(queryItem => {
+                    if (queryItem.word === value) {
+                      queryItem.selected = false;
+                    }
+                  });
+                }}
+              />
             ))
           : null}
       </MnemonicSelectedContainer>
@@ -68,21 +97,18 @@ const BackupMnemonicsScreen = () => {
                   if (item.word === value) {
                     item.selected = true;
                     console.log(mnemonics);
-                    if (selectedMnemonics.length === 0) {
-                      SetSelectedMnemonics([item.word]);
-                    }else {
-                        var currentSelected : string[]= []; 
-                        Object.assign(currentSelected,selectedMnemonics);
-                        currentSelected.push(item.word);
-                        SetSelectedMnemonics(currentSelected);
-                    }
+                    var currentSelected: string[] = [];
+                    Object.assign(currentSelected, selectedMnemonics);
+                    currentSelected.push(item.word);
+                    SetVaild(checkMnemonicVaild(currentSelected));
+                    SetSelectedMnemonics(currentSelected);
                   }
                 }}
               />
             ))
           : null}
       </MnemonicContainer>
-      {/* <BackupButton title="sadad" onPress={() => {}} /> */}
+      {vaild !== true ? <AlterLabel>助记词顺序错误</AlterLabel> : null}
       <Button
         disabled={false}
         active={false}

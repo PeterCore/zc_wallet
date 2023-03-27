@@ -63,6 +63,14 @@ export const SubTitleLabel = styled.Text`
   color: #5b5b5b;
   max-lines: 2px;
 `;
+
+export const AlterLabel = styled.Text`
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: red;
+  max-lines: 2px;
+`;
 export const Button = styled.TouchableOpacity.attrs({
   activeOpacity: 0.7,
 })`
