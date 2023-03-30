@@ -35,7 +35,7 @@ export const Item = styled.Text`
   color: ${(props: Props) => (props.enable === true ? '#666' : '#999')};
 `;
 export const Button = styled.TouchableOpacity.attrs({
-  activeOpacity: 0.7,
+  activeOpacity: 1.0,
 })`
   flex-direction: row;
   align-items: center;

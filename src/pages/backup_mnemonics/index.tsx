@@ -2,7 +2,8 @@ import Tag from '@/compenonts/tag';
 import {MnemonicItem, ParamMnemonic} from '@/model';
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {Alert} from 'react-native';
+import {Dimensions} from 'react-native';
+import Toast from 'react-native-toast-message';
 import {
   AlterLabel,
   Button,
@@ -22,6 +23,8 @@ const BackupMnemonicsScreen = () => {
   const [vaild, SetVaild] = useState(true);
   const password = route.params.password;
   const mnemonic = route.params.mnemonic;
+  const screenHeight = Dimensions.get('window').height;
+
   useEffect(() => {
     const mnemonicList = mnemonic.split(' ');
     const sort_mnemonics = shuffleArray(mnemonicList);
@@ -47,8 +50,9 @@ const BackupMnemonicsScreen = () => {
   const checkMnemonicVaild = (selecteds: string[]) => {
     var _vaild: boolean = false;
     const mnemonicList = mnemonic.split(' ');
-    var index = selecteds.length - 1;
-    if (mnemonicList[index] === selecteds[index]) {
+    var index = selecteds.length;
+    const sliceArray = mnemonicList.slice(0, index);
+    if (JSON.stringify(selecteds) === JSON.stringify(sliceArray)) {
       _vaild = true;
     }
     return _vaild;
@@ -110,10 +114,19 @@ const BackupMnemonicsScreen = () => {
       </MnemonicContainer>
       {vaild !== true ? <AlterLabel>助记词顺序错误</AlterLabel> : null}
       <Button
-        disabled={false}
-        active={false}
-        onPress={() => Alert.alert('Right button pressed')}
-      />
+        onPress={() => {
+          if (!vaild || selectedMnemonics.length !== mnemonics.length) {
+            Toast.show({
+              type: 'error',
+              text1: '验证失败',
+              topOffset: screenHeight / 2,
+            });
+            return;
+          }
+        }}
+      >
+        <Description>完成</Description>
+      </Button>
     </Container>
   );
 };

@@ -72,14 +72,18 @@ export const AlterLabel = styled.Text`
   max-lines: 2px;
 `;
 export const Button = styled.TouchableOpacity.attrs({
-  activeOpacity: 0.7,
+  activeOpacity: 1.0,
 })`
-  margin-top: 20px;
+  margin-top: 30px;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  border-width: 2px;
+  border-color: #00ccff;
   height: 44px;
-  background-color: ${(props: Props) => (props.active ? '#333333' : '#ededed')};
+  background-color: #00ccff;
 `;
 export const Description = styled.Text`
   font-size: 16px;
